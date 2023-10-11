@@ -1,9 +1,8 @@
 #include "main.h"
 
 /**
- * jack_bauer - prints every minute of the day
+ * jack_bauer - Prints every minute of the day of Jack Bauer.
 */
-
 void jack_bauer(void)
 {
 	int hours, minutes;
@@ -20,3 +19,4 @@ void jack_bauer(void)
 			_putchar('\n');
 		}
 	}
+}
