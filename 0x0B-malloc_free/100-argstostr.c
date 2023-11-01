@@ -1,49 +1,47 @@
-#include "main.h"
 #include <stdlib.h>
+#include "main.h"
 
 /**
- * argstostr - concatenate command line arguments into a single string
+ * argstostr - concatenates all the arguments of the program
  * @ac: number of arguments
  * @av: array of arguments
- * Return: concatenated string, or NULL on failure
+ * Return: pointer to a new string containing concatenated arguments
+ * or NULL if it fails
  */
 char *argstostr(int ac, char **av)
 {
-	int i, n, r = 0, l = 0;
 	char *str;
+	int i, j, len = 0, total_len = 0;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
 	for (i = 0; i < ac; i++)
 	{
-		for (n = 0; av[i][n]; n++)
-			l++;
+		for (j = 0; av[i][j]; j++)
+		{
+			len++;
+		}
+		total_len += len + 1; /* Add 1 for newline character */
+		len = 0;
 	}
 
-	l += ac;
-
-	str = malloc(sizeof(char) * (l + 1));
-
+	str = malloc(sizeof(char) * total_len + 1); /* Add 1 for null terminator */
 	if (str == NULL)
 		return (NULL);
 
+	len = 0;
 	for (i = 0; i < ac; i++)
 	{
-		for (n = 0; av[i][n]; n++)
+		for (j = 0; av[i][j]; j++)
 		{
-			str[r] = av[i][n];
-			r++;
+			str[len] = av[i][j];
+			len++;
 		}
-
-		if (i < ac - 1)
-		{
-			str[r] = '\n';
-			r++;
-		}
+		str[len] = '\n'; /* Add newline character */
+		len++;
 	}
 
-	str[r] = '\0';
-
+	str[len] = '\0'; /* Null-terminate the string */
 	return (str);
 }
